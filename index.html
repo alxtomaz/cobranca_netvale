@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+   <header>
+    <nav>
+        <button>Cadastros</button>
+        <button onclick="atendimento.mostrarJanela()">Atendimentos</button>
+        <button>Relatorios</button>
+    </nav>
+   </header>
+        <!-- cadastro de cobrança  -->
+        <main class="container">
+            <!-- identificação do cliente -->
+            <div class="border coluna" >
+                <div>
+                    <div class="space">
+                        <label>ID CLIENTE:</label>
+                        <input type="id" placeholder="idcliente" id="idcliente">
+                    </div>
+                    <div class="space">
+                        <label>NOME:</label>
+                        <input type="text" placeholder="nomeCliente" id="nome">
+                    </div>                   
+                </div>     
+                <div >
+                    <div class="space"> 
+                        <label>ID:</label>
+                        <input type="id" placeholder="idAtend" id="idatend">
+                    </div>
+                    <div class="space">
+                        <label>DATA:</label>
+                        <input type="date" placeholder="dataAtend" id="dataAtend"> 
+                    </div>                    
+                </div>                          
+            </div>
+            <!-- informações sobre divida / negociação -->
+            <div class="border coluna" id="">
+                    <div>
+                        <div class="space">
+                            <label>STATUS:</label>
+                            <input type="text" placeholder="status" id="status">
+                        </div>
+                        <div class="space">
+                            <label>PAGAM.:</label>
+                            <input type="text" placeholder="pagamento" id="pagamento"> 
+                        </div>                        
+                    </div>   
+                    <div>
+                        <div class="space">
+                            <label>VALOR REAL:</label>                
+                            <input type="number" placeholder="valorReal" id="valorReal" required>
+                        </div>
+                        <div class="space">
+                            <label>VALOR REN.:</label> 
+                            <input type="number" placeholder="ValorRen" id="valorRen" required>
+                        </div>           
+                    </div> 
+            </div>
+            <!-- informações obs -->
+            <div class="border coluna">
+                <div  class="">
+                    <div class="space">
+                        <label>VENCIMENTO:</label>
+                        <input type="date" placeholder="dataAtend" id="dateVenc">
+                    </div>
+                    <div class="space" id="oi">
+                        <button onclick="atendimento.adicionar()" id="btn1">Adicionar</button>
+                        <button onclick="atendimento.cancelar()">Deletar</button>
+                        <!-- <p>DESCONTO:</p>
+                        <input type="number" placeholder="valorDesc" id="valorDesc "> -->
+                    </div>                    
+                </div>
+                <textarea rows="3" placeholder="OBSERVAÇÕES" id="obs"></textarea>
+            </div>
+        </main>
+        <div>
+            <table class="tabela" border="1">
+
+                <thead>
+                    <th> ID </th>
+                    <th> ID CLIENTE </th>
+                    <th style="width: 200PX;"> NOME </th>
+                    <th> ID ATEND </th>
+                    <th> DATA ATEND </th>
+                    <th> STATUS </th>
+                    <th> PAGAMENTO </th>
+                    <th> VALOR REAL </th>
+                    <th> VALOR REN </th>
+                    <th> DESCONTO </th>
+                    <th> VENCIMENTO </th>
+                    <th> SITUAÇÃO </th>
+                    <!-- <th style="width: 10px;"> OBS </th> em processo ainda -->
+                    <th style="width: 200PX;"> AÇÕES </th>
+                </thead>
+                <tbody class="tbody">
+
+                </tbody>
+            </table>
+            <table class="tabela" border="1">
+                <thead>
+                    <th>TOTAL REAL</th>
+                    <th>TOTAL RENEGOCIADO</th>
+                    <th>DESCONTO TOTAL</th>
+                </thead>
+                <tbody id="tbody1">
+                    <tr>
+                        <td id="total1">valor</td>
+                        <td id="total2"> valor </td>
+                        <td id="total3"> valor </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- TABELA DE FILTRO DAS INFORMAÇÕES  -->
+
+            <div id="janela" style="display: none;">
+
+                <h1 id="fechar" onclick="atendimento.fechar()" >x</h1>
+                <!-- <img id="fechar" onclick="atendimento.fechar()" src="img/cruz.svg"  alt="fechar"> -->
+                <nav class="container-filter">
+                    <div class="border colunafiltro">
+                        <div>
+                            <h5>CLIENTE</h5>
+                            <div class="space">
+                                <label>Nome </label>
+                                <input type="text" placeholder="Nome" id="name-filtro"> 
+                            </div>  
+                            <div class="space">
+                                <label>Id </label>
+                                <input type="text" placeholder="Id atend." id="idatend_filtro">
+                            </div>                                                  
+                        </div>   
+                        <div>
+                            <h5>FINANCEIRO</h5>
+                            <div class="space">
+                                <label>Status </label>                
+                                <input type="text" placeholder="Bloqueio/Financeiro" id="status_filtro" required>
+                            </div>
+                            <div class="space">
+                                <label>Pagamento </label> 
+                                <input type="text" placeholder="Sim/Nao" id="pagamento_filtro" required>
+                            </div>
+                        </div>
+                        <div>
+                            <h5>ATENDIMENTO</h5>
+                            <div class="space">
+                                <label> Inicio </label>
+                                <input id="date-aten-inicio" type="date" value="">
+                            </div>
+                            <div>
+                                <label> Final </label>
+                                <input id="date-aten-final" type="date" value="">
+                            </div>                                                    
+                        </div>
+                        <div>
+                            <h5>VENCIMENTO</h5>
+                            <div class="space">
+                                <label> Inicio </label>
+                                <input id="date-venc-inicio" type="date" value="">
+                            </div>
+                            <div>
+                                <label> Final </label>
+                                <input id="date-venc-final" type="date" value="">
+                            </div>                                                    
+                        </div>
+                        <div>
+                            <h5>FILTROS</h5>
+                            <div id="menufiltro" class="space">
+                                <label>Filtro Geral</label>
+                                <input type="tex" placeholder="Digite para Filtrar" id="input-filtro">
+                            </div>
+                            <button onclick="filtrarTabela()">Filtrar</button>
+                        </div>
+                    </div>
+                        
+                </nav>                             
+                <table class="tabela" border="1">
+                    <thead>
+                        <th> ID </th>
+                        <th> ID CLIENTE </th>
+                        <th> NOME </th>
+                        <th> ID ATEND </th>
+                        <th> DATA ATEND </th>
+                        <th> STATUS </th>
+                        <th> PAGAMENTO </th>
+                        <th> VALOR REAL </th>
+                        <th> VALOR REN </th>
+                        <th> DESCONTO </th>
+                        <th> VENCIMENTO </th>
+                        <th> SITUAÇÃO </th>
+                        <!-- <th style="width: 10px;"> OBS </th> em processo ainda -->
+                        <th> AÇÕES </th>
+                    </thead>
+                <tbody id="filtro-tabela" class="tbody">
+                                        
+                </tbody>
+            </table>
+            </div>           
+        </div>      
+        <script src="script.js"></script>
+        <script src="script_filtro.js"></script>
+  </body>
+</html>
